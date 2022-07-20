@@ -86,6 +86,9 @@ while True:
     if is_win(used_x_cells):
         draw_message('Congratulation! '+name1+' win!')
         break
+    if len(used_x_cells + used_o_cells) == 9:
+        draw_message('Draw!')
+        break
     cell = get_cell(field.getMouse())
     while cell in used_x_cells + used_o_cells:
         cell = get_cell(field.getMouse())
@@ -94,9 +97,6 @@ while True:
     if is_win(used_o_cells):
         draw_message('Congratulation! '+name1+' win!')
         break
-
-
-
 
 
 field.getMouse()
