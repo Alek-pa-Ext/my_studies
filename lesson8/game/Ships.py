@@ -7,7 +7,6 @@ class CapitalShip(pygame.sprite.Sprite):
         super(CapitalShip, self).__init__()
         self.screen = screen
         self.speed = 2.5
-        self.size = 1
         self.hp = 100
         self.power = 1
         self.anim_count = 0
@@ -17,11 +16,11 @@ class CapitalShip(pygame.sprite.Sprite):
         self.rect.x = screen.get_rect().width
         self.rect.y = y
 
-    def damage(self, damage):
+    def get_damage(self, damage):
         self.hp -= damage
 
-    def draw(self, screen):
-        screen.blit(self.imgs[self.anim_count // 30], self.rect)
+    def draw(self):
+        self.screen.blit(self.imgs[self.anim_count // 30], self.rect)
 
     def move(self):
         if self.rect.x > - self.rect.width:
