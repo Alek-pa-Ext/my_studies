@@ -8,7 +8,7 @@ class Scores():
         self.text_color = (235, 229, 73)
         self.font = pygame.font.SysFont('appetite', 36)
         self.x = 20
-        self.y = 20 + 10 * n
+        self.y = 20 + 40 * n
         self.update()
 
     def update(self):

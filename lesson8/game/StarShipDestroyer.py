@@ -27,6 +27,7 @@ def run():
     gun = Gun(screen)
     bullets = Group()
     life = Scores(screen, 'Life', 3, 0)
+    score = Scores(screen, 'Score', 0, 1)
 
     """Main cycle"""
     while True:
@@ -36,7 +37,7 @@ def run():
                 pygame.quit()
                 sys.exit()
             elif event.type == UEVENT_SPAWN_SHIP:  # Spawn ships
-                new_ship = CapitalShip(screen, random.randrange(10, screen.get_height() - 200, 128))
+                new_ship = CapitalShip(screen, random.randrange(30, screen.get_height() - 200, 128))
                 ships.add(new_ship)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 new_bullet = Bullet(screen, gun.rect.centerx - 5, gun.rect.top)
@@ -57,26 +58,27 @@ def run():
             bullet.move()
             if bullet.rect.bottom <= 0:
                 bullets.remove(bullet)
-            collisions = pygame.sprite.groupcollide(bullets, ships, True, False)
-            if collisions:
-                ship = collisions.get(bullet)[0]
-                ship.get_damage(gun.damage)
+
+
 
 
         """Act ships"""
         for ship in ships.sprites():
             ship.draw()
             ship.move()
-
-            #if collisions:
-                #ship.get_damage(gun.damage)
             if ship.hp <= 0:
                 ships.remove(ship)
+                score.stats += ship.cost
             if ship.rect.x <= 0:
                 ships.remove(ship)
                 life.stats -= ship.power
+            collisions = pygame.sprite.groupcollide(ships, bullets, False, True)
+            if collisions:
+                for ship in collisions.keys():
+                    ship.get_damage(gun.damage)
 
         life.draw()
+        score.draw()
 
 
         gun.move(pygame.mouse.get_pos()[0])
