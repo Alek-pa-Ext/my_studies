@@ -33,5 +33,3 @@ class CapitalShip(pygame.sprite.Sprite):
             self.rect.x = 1500
             self.anim_count = 0
 
-
-

@@ -4,6 +4,7 @@ from pygame.sprite import Group
 import random
 from gun import Gun
 from bullet import Bullet
+from scores import Scores
 
 def run():
 
@@ -25,7 +26,7 @@ def run():
 
     gun = Gun(screen)
     bullets = Group()
-    lifes = 10
+    life = Scores(screen, 'Life', 3, 0)
 
     """Main cycle"""
     while True:
@@ -50,32 +51,36 @@ def run():
         bullets.update()
 
 
-
         """Act bullets"""
         for bullet in bullets:
             bullet.draw()
             bullet.move()
             if bullet.rect.bottom <= 0:
                 bullets.remove(bullet)
+            collisions = pygame.sprite.groupcollide(bullets, ships, True, False)
+            if collisions:
+                ship = collisions.get(bullet)[0]
+                ship.get_damage(gun.damage)
 
-
-        gun.draw()
 
         """Act ships"""
         for ship in ships.sprites():
             ship.draw()
             ship.move()
-            collisions = pygame.sprite.groupcollide(bullets, ships, True, False)
-            if collisions:
-                ship.get_damage(gun.damage)
+
+            #if collisions:
+                #ship.get_damage(gun.damage)
             if ship.hp <= 0:
                 ships.remove(ship)
             if ship.rect.x <= 0:
                 ships.remove(ship)
-                lifes -= ship.power
+                life.stats -= ship.power
+
+        life.draw()
 
 
         gun.move(pygame.mouse.get_pos()[0])
+        gun.draw()
 
         #print(len(bullets))
         pygame.display.flip()
