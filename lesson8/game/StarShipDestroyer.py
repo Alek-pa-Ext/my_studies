@@ -2,7 +2,7 @@ import pygame, sys
 from Ships import CapitalShip, MiddleShip, SmallShip
 from pygame.sprite import Group
 import random
-from gun import Gun
+from Gun import Gun
 from bullet import Bullet
 from scores import Scores
 from pause import Stop
@@ -13,7 +13,7 @@ def run():
     pygame.init()
     screen = pygame.display.set_mode((1500, 700))
     pygame.display.set_caption('StarShipDestroyer')
-    back_img = pygame.image.load('..\\images\\bg_img-space.png')
+    back_img = pygame.image.load('../images/bg_img_space.png')
 
     """Set time"""
     FPS = 30

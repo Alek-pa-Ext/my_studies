@@ -5,8 +5,8 @@ class Stop():
         self.is_pause = False
         self.is_gameover = False
         self.screen = screen
-        self.pause_img = pygame.image.load('..\\images\\pause.png')
-        self.gameover_img = pygame.image.load('..\\images\\gameover.png')
+        self.pause_img = pygame.image.load('../images/pause.png')
+        self.gameover_img = pygame.image.load('../images/gameover.png')
         self.rect = self.pause_img.get_rect()
         self.rect.centerx = self.screen.get_rect().centerx
         self.rect.centery = self.screen.get_rect().centery

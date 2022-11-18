@@ -21,8 +21,8 @@ class CapitalShip(pygame.sprite.Sprite):
         self.max_hp = 100
         self.power = 3
         self.cost = 10 * difficult
-        self.imgs = [pygame.image.load('..\\images\\1st-spaceship.png'),
-                     pygame.image.load('..\\images\\1st-spaceship_1.png')]
+        self.imgs = [pygame.image.load('../images/1st-spaceship.png'),
+                     pygame.image.load('../images/1st-spaceship_1.png')]
 
 
     def get_damage(self, damage):
@@ -51,8 +51,8 @@ class CapitalShip(pygame.sprite.Sprite):
 
 class MiddleShip(CapitalShip):
     def stats(self, difficult):
-        self.imgs = [pygame.image.load('..\\images\\2-spaceship_2.png'),
-                     pygame.image.load('..\\images\\2-spaceship_3.png')]
+        self.imgs = [pygame.image.load('../images/2-spaceship_2.png'),
+                     pygame.image.load('../images/2-spaceship_3.png')]
         self.speed = 3 * (difficult / 10)
         self.max_hp = 50
         self.power = 2
@@ -60,8 +60,8 @@ class MiddleShip(CapitalShip):
 
 class SmallShip(CapitalShip):
     def stats(self, difficult):
-        self.imgs = [pygame.image.load('..\\images\\3-spaceship_1.png'),
-                     pygame.image.load('..\\images\\3-spaceship_2.png')]
+        self.imgs = [pygame.image.load('../images/3-spaceship_1.png'),
+                     pygame.image.load('../images/3-spaceship_2.png')]
         self.speed = 5 * (difficult / 10)
         self.max_hp = 10
         self.power = 1
