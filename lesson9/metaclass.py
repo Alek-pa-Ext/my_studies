@@ -3,7 +3,7 @@ class CustomMeta(type):
         meths = ((name, value) for name, value in dct.items() if not name.startswith('__'))
         new_meths = dict(('method_' + name, value) if callable(value) else (name, value) for name, value in meths)
         new_meths['class_name'] = name.lower()
-        return type.__new__(cls, name, bases, new_meths)
+        return super(CustomMeta, cls).__new__(cls, name, bases, new_meths)
 
 if __name__ == "__main__":
     class Proba(metaclass=CustomMeta):
