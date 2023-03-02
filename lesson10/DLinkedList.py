@@ -1,3 +1,6 @@
+import random
+
+
 class DLinkedList:
     def __init__(self, base_list):
         self.head = Node(base_list[0])
@@ -22,6 +25,15 @@ class DLinkedList:
                 print(node.value, ' <-> ', end='')
             node = node.next
 
+    def length(self):
+        node = self.head
+        length = 0
+        while node:
+            length += 1
+            node = node.next
+        return length
+
+
 
 class Node:
     def __init__(self, value = None):
@@ -30,5 +42,6 @@ class Node:
         self.prev = None
 
 if __name__ == "__main__":
-    l = DLinkedList([1, 2, 3, 4, 5])
+    l = DLinkedList(random.sample(range(0, 100), 15))
     l.print_list()
+    print(l.length())
