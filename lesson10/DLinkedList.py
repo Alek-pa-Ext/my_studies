@@ -33,7 +33,7 @@ class DLinkedList:
             node = node.next
         return length
 
-    def find_position(self, position):
+    def find_node(self, position):
         num_len = self.length()
         if position not in range(num_len):
             return None
@@ -55,8 +55,8 @@ class DLinkedList:
     def insert(self, value, position=None):
         if position == None:
             position = self.length()
-        next_node = self.find_position(position)
-        prev_node = self.find_position(position - 1)
+        next_node = self.find_node(position)
+        prev_node = self.find_node(position - 1)
         new_node = Node(value)
         new_node.next = next_node
         new_node.prev = prev_node
@@ -69,10 +69,27 @@ class DLinkedList:
         else:
             self.head = new_node
 
+    def remove(self, position=None):
+        if position == None:
+            position = self.length() - 1
+        next_node = self.find_node(position + 1)
+        prev_node = self.find_node(position - 1)
+        if next_node:
+            next_node.prev = prev_node
+        else:
+            self.tail = prev_node
+            prev_node.next = None
+        if prev_node:
+            prev_node.next = next_node
+        else:
+            self.head = next_node
+            next_node.prev = None
 
-
-
-
+    def show_neighbors(self, position):
+        node = self.find_node(position)
+        prev = node.prev.value if node.prev else 'None'
+        next = node.next.value if node.next else 'None'
+        print(prev, '<->', node.value, '<->', next)
 
 class Node:
     def __init__(self, value=None):
@@ -83,6 +100,6 @@ class Node:
 if __name__ == "__main__":
     #l = DLinkedList(random.sample(range(0, 100), 15))
     l = DLinkedList([0, 1, 2, 3, 4, 5])
-    l.insert(6)
-    l.print_list()
+    l.show_neighbors(5)
+    #l.print_list()
     #print(l.find_position(1))
